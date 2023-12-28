@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="display_small">#FF000000</color>
+    <color name="text_medium">#FF593E36</color>
+    <color name="text_title">#51291E</color>
+    <color name="body">#FF593E36</color>
+    <color name="input_background">#F0EBE0</color>
+    <color name="placeholder">#FF593E36</color>
+    <color name="shimmer">#C3C3C3</color>
+</resources>
