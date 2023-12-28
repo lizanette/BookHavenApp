@@ -10,7 +10,9 @@ import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.bookhavenapp.presentation.onboarding.OnBoardingScreen
 import com.example.bookhavenapp.ui.theme.BookHavenAppTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,10 +22,8 @@ class MainActivity : ComponentActivity() {
                 Box(
                     modifier = Modifier.background(color = MaterialTheme.colorScheme.background)
                 ) {
-                    OnBoardingScreen()
                 }
             }
         }
     }
 }
-
