@@ -2,10 +2,16 @@ package com.example.bookhavenapp.dependency_injection
 
 import android.app.Application
 import com.example.bookhavenapp.data.manager.LocalUserManagerImplementation
+import com.example.bookhavenapp.data.remote.BooksApi
+import com.example.bookhavenapp.data.repository.BooksRepositoryImplementation
 import com.example.bookhavenapp.domain.manager.LocalUserManager
+import com.example.bookhavenapp.domain.repository.BooksRepository
 import com.example.bookhavenapp.domain.use_cases.app_entry.AppEntryUseCases
 import com.example.bookhavenapp.domain.use_cases.app_entry.ReadAppEntry
 import com.example.bookhavenapp.domain.use_cases.app_entry.SaveAppEntry
+import com.example.bookhavenapp.domain.use_cases.books.BooksUseCases
+import com.example.bookhavenapp.domain.use_cases.books.GetBooks
+import com.example.bookhavenapp.utils.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,4 +38,31 @@ object AppModule {
         readAppEntry = ReadAppEntry(localUserManager),
         saveAppEntry = SaveAppEntry(localUserManager)
     )
+
+    @Provides
+    @Singleton
+    fun provideBooksApi(): BooksApi {
+        return Retrofit
+            .Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build().create(BooksApi::class.java)
+
+    }
+
+    @Provides
+    @Singleton
+    fun provideBooksRepository(
+        booksApi: BooksApi
+    ): BooksRepository = BooksRepositoryImplementation(booksApi)
+
+    @Provides
+    @Singleton
+    fun provideBooksUseCases(
+        booksRepository: BooksRepository
+    ): BooksUseCases {
+        return BooksUseCases(
+            getBooks = GetBooks(booksRepository)
+        )
+    }
 }
