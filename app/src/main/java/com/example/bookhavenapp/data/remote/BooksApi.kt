@@ -14,4 +14,10 @@ interface BooksApi {
         @Query("key") key: String = API_KEY
     ): BooksResponse
 
+    @GET("volumes")
+    suspend fun searchBooks(
+        @Query("q") searchQuery: String,
+        @Query("startIndex") startIndex: Int,
+        @Query("key") key: String = API_KEY
+    ): BooksResponse
 }

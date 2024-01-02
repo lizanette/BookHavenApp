@@ -5,10 +5,10 @@ import com.example.bookhavenapp.domain.model.Item
 import com.example.bookhavenapp.domain.repository.BooksRepository
 import kotlinx.coroutines.flow.Flow
 
-class GetBooks(
+class SearchBooks(
     private val booksRepository: BooksRepository
 ) {
-    operator fun invoke(): Flow<PagingData<Item>> {
-        return booksRepository.getBooks()
+    operator fun invoke(searchQuery: String): Flow<PagingData<Item>> {
+        return booksRepository.searchBooks(searchQuery = searchQuery)
     }
 }

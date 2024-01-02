@@ -23,6 +23,7 @@ fun BooksGrid(
     if (handlePagingResult) {
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
+            horizontalArrangement = Arrangement.spacedBy(20.dp),
             verticalArrangement = Arrangement.spacedBy(20.dp),
             content = {
                 items(count = books.itemCount) {

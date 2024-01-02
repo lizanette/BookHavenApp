@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
@@ -72,8 +73,9 @@ fun BookItem(
             contentScale = ContentScale.Crop,
             model = ImageRequest
                 .Builder(context)
-                .data(item.volumeInfo.imageLinks.thumbnail.replace("http://", "https://"))
+                .data(item.volumeInfo.imageLinks?.thumbnail?.replace("http://", "https://"))
                 .build(),
+            placeholder = painterResource(id = R.drawable.placeholder),
             contentDescription = "Book Cover"
         )
 

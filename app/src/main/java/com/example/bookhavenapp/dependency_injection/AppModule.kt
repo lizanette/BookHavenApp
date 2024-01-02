@@ -11,6 +11,7 @@ import com.example.bookhavenapp.domain.use_cases.app_entry.ReadAppEntry
 import com.example.bookhavenapp.domain.use_cases.app_entry.SaveAppEntry
 import com.example.bookhavenapp.domain.use_cases.books.BooksUseCases
 import com.example.bookhavenapp.domain.use_cases.books.GetBooks
+import com.example.bookhavenapp.domain.use_cases.books.SearchBooks
 import com.example.bookhavenapp.utils.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -62,7 +63,8 @@ object AppModule {
         booksRepository: BooksRepository
     ): BooksUseCases {
         return BooksUseCases(
-            getBooks = GetBooks(booksRepository)
+            getBooks = GetBooks(booksRepository),
+            searchBooks = SearchBooks(booksRepository)
         )
     }
 }
