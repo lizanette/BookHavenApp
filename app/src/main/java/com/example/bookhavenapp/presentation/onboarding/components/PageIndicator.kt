@@ -27,7 +27,7 @@ fun PageIndicator(
     unselectedColor: Color = BlueGray
 ) {
     Row(
-        modifier = Modifier,
+        modifier = modifier,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         repeat(numberOfPages) {

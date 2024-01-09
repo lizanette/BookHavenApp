@@ -12,7 +12,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.bookhavenapp.ui.theme.WhiteGray
 
-
 @Composable
 fun NextButton(
     text: String,

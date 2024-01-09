@@ -4,8 +4,10 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.bookhavenapp.domain.model.Item
 
-class BooksPagingSource(
-    private val booksApi: BooksApi
+
+class SearchBooksPagingSource(
+    private val booksApi: BooksApi,
+    private val searchQuery: String
 ): PagingSource<Int, Item>() {
 
     private var totalBooks = 0
@@ -13,7 +15,7 @@ class BooksPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Item> {
         val startIndex = params.key ?: 0
         return try {
-            val booksResponse = booksApi.getBooks(startIndex = startIndex)
+            val booksResponse = booksApi.searchBooks(searchQuery = searchQuery, startIndex = startIndex)
             totalBooks += booksResponse.items.size
             val items = booksResponse.items.distinctBy { it.volumeInfo.title } // Remove duplicates
             LoadResult.Page(
