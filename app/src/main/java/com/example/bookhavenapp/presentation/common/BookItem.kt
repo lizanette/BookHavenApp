@@ -3,22 +3,16 @@ package com.example.bookhavenapp.presentation.common
 import android.content.res.Configuration
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Star
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
@@ -52,7 +46,6 @@ import com.example.bookhavenapp.presentation.common.Dimensions.BookItemWidth
 import com.example.bookhavenapp.presentation.common.Dimensions.ExtraSmallPadding
 import com.example.bookhavenapp.ui.theme.BookHavenAppTheme
 
-
 @Composable
 fun BookItem(
     modifier: Modifier = Modifier,
@@ -75,7 +68,7 @@ fun BookItem(
                 .Builder(context)
                 .data(item.volumeInfo.imageLinks?.thumbnail?.replace("http://", "https://"))
                 .build(),
-            placeholder = painterResource(id = R.drawable.placeholder),
+            error = painterResource(id = R.drawable.placeholder),
             contentDescription = "Book Cover"
         )
 
@@ -107,27 +100,6 @@ fun BookItem(
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis
             )
-
-            Row(
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Icon(
-                    imageVector = Icons.Filled.Star,
-                    contentDescription = "Star Icon",
-                    tint = Color(0xFFFDCC0D),
-                    modifier = Modifier.padding(bottom = 1.dp, end = 2.dp).size(12.dp),
-                )
-                Text(
-                    text = item.volumeInfo.ratingsCount.toString(),
-                    fontSize = 12.sp,
-                    style = TextStyle(platformStyle = PlatformTextStyle(includeFontPadding = false)),
-                    fontFamily = FontFamily(Font(R.font.poppins_semibold)),
-                    color = colorResource(id = R.color.text_medium),
-                )
-
-            }
-
-
         }
     }
 }

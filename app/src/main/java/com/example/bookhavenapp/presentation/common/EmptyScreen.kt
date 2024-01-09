@@ -33,7 +33,7 @@ import java.net.SocketTimeoutException
 
 @Composable
 fun EmptyScreen(error: LoadState.Error? = null) {
-    var message by remember {
+    val message by remember {
         mutableStateOf(parseErrorMessage(error = error))
     }
 
@@ -45,21 +45,21 @@ fun EmptyScreen(error: LoadState.Error? = null) {
         mutableStateOf(false)
     }
 
-    val alphaAnimation by animateFloatAsState(
-        targetValue = if (startAnimation) 0.3f else 0f,
-        animationSpec = tween(durationMillis = 1000),
-        label = ""
-    )
-
     LaunchedEffect(key1 = true) {
         startAnimation = true
     }
 
-    EmptyContent(alphaAnim = alphaAnimation, message = message, iconId = icon)
+    EmptyContent(message = message, iconId = icon)
 }
 
 @Composable
-fun EmptyContent(alphaAnim: Float, message: String, iconId: Int) {
+fun EmptyContent(message: String, iconId: Int) {
+    val alphaAnimation by animateFloatAsState(
+        targetValue = 0.3f,
+        animationSpec = tween(durationMillis = 1000),
+        label = ""
+    )
+
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -71,12 +71,12 @@ fun EmptyContent(alphaAnim: Float, message: String, iconId: Int) {
             tint = if (isSystemInDarkTheme()) Color.LightGray else Color.DarkGray,
             modifier = Modifier
                 .size(120.dp)
-                .alpha(alphaAnim)
+                .alpha(alphaAnimation)
         )
         Text(
             modifier = Modifier
                 .padding(10.dp)
-                .alpha(alphaAnim),
+                .alpha(alphaAnimation),
             text = message,
             style = MaterialTheme.typography.bodyMedium,
             color = if (isSystemInDarkTheme()) Color.LightGray else Color.DarkGray,
@@ -104,5 +104,5 @@ fun parseErrorMessage(error: LoadState.Error?): String {
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun EmptyScreenPreview() {
-    EmptyContent(alphaAnim = 0.3f, message = "Internet Unavailable.", R.drawable.ic_network_error)
+    EmptyContent(message = "Internet Unavailable.", R.drawable.ic_network_error)
 }

@@ -1,6 +1,7 @@
 package com.example.bookhavenapp.presentation.common
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -22,15 +23,15 @@ fun BooksGrid(
     val handlePagingResult = handlePagingResult(items = books)
     if (handlePagingResult) {
         LazyVerticalGrid(
+            modifier = modifier.fillMaxSize(),
             columns = GridCells.Fixed(2),
             horizontalArrangement = Arrangement.spacedBy(20.dp),
             verticalArrangement = Arrangement.spacedBy(20.dp),
             content = {
-                items(count = books.itemCount) {
-                    it ->
-                        books[it]?.let {
-                            BookItem(item = it, onClick = { onClick(it) })
-                        }
+                items(count = books.itemCount) { it ->
+                    books[it]?.let {
+                        BookItem(item = it, onClick = { onClick(it) })
+                    }
                 }
             }
         )

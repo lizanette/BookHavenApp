@@ -18,14 +18,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.example.bookhavenapp.presentation.common.BackButton
+import com.example.bookhavenapp.presentation.onboarding.components.BackButton
 import com.example.bookhavenapp.presentation.common.Dimensions.MediumPadding2
 import com.example.bookhavenapp.presentation.common.Dimensions.PageIndicatorWidth
-import com.example.bookhavenapp.presentation.common.NextButton
+import com.example.bookhavenapp.presentation.onboarding.components.NextButton
 import com.example.bookhavenapp.presentation.onboarding.components.OnBoardingPage
 import com.example.bookhavenapp.presentation.onboarding.components.PageIndicator
 import kotlinx.coroutines.launch
-
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

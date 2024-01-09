@@ -1,4 +1,4 @@
-package com.example.bookhavenapp.presentation.common
+package com.example.bookhavenapp.presentation.onboarding.components
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
