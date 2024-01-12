@@ -25,8 +25,7 @@ class MainViewModel @Inject constructor(
         private set
 
     init {
-        appEntryUseCases.readAppEntry().onEach {
-                shouldStartFromHomeScreen ->
+        appEntryUseCases.readAppEntry().onEach { shouldStartFromHomeScreen ->
             startDestination = if(shouldStartFromHomeScreen) {
                 Route.BooksNavigation.route
             } else {

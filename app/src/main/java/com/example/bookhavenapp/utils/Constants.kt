@@ -6,4 +6,6 @@ object Constants {
 
     const val BASE_URL = "https://www.googleapis.com/books/v1/"
     const val API_KEY = "AIzaSyDpeXIaCbbewDDLukAJR8zdliVYpdMQWZs"
+
+    const val BOOKS_DATABASE_NAME = "books_db"
 }

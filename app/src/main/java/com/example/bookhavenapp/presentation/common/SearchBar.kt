@@ -113,7 +113,7 @@ fun SearchBar(
                     keyboardController?.hide()
                 }
             ),
-            textStyle = MaterialTheme.typography.bodySmall,
+            textStyle = MaterialTheme.typography.bodyMedium,
             interactionSource = interactionSource
         )
     }

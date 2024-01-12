@@ -1,6 +1,10 @@
 package com.example.bookhavenapp.dependency_injection
 
 import android.app.Application
+import androidx.room.Room
+import com.example.bookhavenapp.data.local.BookDao
+import com.example.bookhavenapp.data.local.BookDatabase
+import com.example.bookhavenapp.data.local.BookTypeConverter
 import com.example.bookhavenapp.data.manager.LocalUserManagerImplementation
 import com.example.bookhavenapp.data.remote.BooksApi
 import com.example.bookhavenapp.data.repository.BooksRepositoryImplementation
@@ -13,6 +17,7 @@ import com.example.bookhavenapp.domain.use_cases.books.BooksUseCases
 import com.example.bookhavenapp.domain.use_cases.books.GetBooks
 import com.example.bookhavenapp.domain.use_cases.books.SearchBooks
 import com.example.bookhavenapp.utils.Constants.BASE_URL
+import com.example.bookhavenapp.utils.Constants.BOOKS_DATABASE_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -67,4 +72,24 @@ object AppModule {
             searchBooks = SearchBooks(booksRepository)
         )
     }
+
+    @Provides
+    @Singleton
+    fun provideBooksDatabase(
+        application: Application
+    ): BookDatabase {
+        return Room.databaseBuilder(
+            context = application,
+            klass = BookDatabase::class.java,
+            name = BOOKS_DATABASE_NAME
+        ).addTypeConverter(BookTypeConverter())
+            .fallbackToDestructiveMigration()
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideBookDao(
+        booksDatabase: BookDatabase
+    ): BookDao = booksDatabase.bookDao
 }

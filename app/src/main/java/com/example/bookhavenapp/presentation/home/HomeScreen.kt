@@ -18,7 +18,9 @@ import com.example.bookhavenapp.R
 import com.example.bookhavenapp.domain.model.Item
 import com.example.bookhavenapp.presentation.common.BooksGrid
 import com.example.bookhavenapp.presentation.common.Dimensions.MediumPadding1
+import com.example.bookhavenapp.presentation.common.Dimensions.MediumPadding3
 import com.example.bookhavenapp.presentation.common.SearchBar
+import com.example.bookhavenapp.presentation.common.TextTitle
 import com.example.bookhavenapp.presentation.navgraph.Route
 
 @Composable
@@ -26,7 +28,6 @@ fun HomeScreen(
     books: LazyPagingItems<Item>,
     navigate: (String) -> Unit
 ) {
-
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -42,6 +43,7 @@ fun HomeScreen(
             contentDescription = "App Logo",
             contentScale = ContentScale.Crop
         )
+
         Spacer(modifier = Modifier.height(MediumPadding1))
 
         SearchBar(
@@ -55,10 +57,14 @@ fun HomeScreen(
             onSearch = {}
         )
 
-        Spacer(modifier = Modifier.height(MediumPadding1))
+        Spacer(modifier = Modifier.height(MediumPadding3))
+
+        TextTitle(text = "Recent Books")
+
+        Spacer(modifier = Modifier.height(MediumPadding3))
 
         BooksGrid(
-            modifier = Modifier.padding(horizontal = MediumPadding1),
+            modifier = Modifier.padding(horizontal = 18.dp),
             books = books,
             onClick = {
                 navigate(Route.BookDetailsScreen.route)

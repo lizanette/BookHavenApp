@@ -8,10 +8,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.bookhavenapp.presentation.common.BooksGrid
 import com.example.bookhavenapp.presentation.common.Dimensions.MediumPadding1
+import com.example.bookhavenapp.presentation.common.Dimensions.MediumPadding3
 import com.example.bookhavenapp.presentation.common.SearchBar
+import com.example.bookhavenapp.presentation.common.TextTitle
 import com.example.bookhavenapp.presentation.navgraph.Route
 
 @Composable
@@ -22,15 +25,16 @@ fun SearchScreen(
 ) {
     Column(
         modifier = Modifier
-            .padding(
-                top = MediumPadding1,
-                start = MediumPadding1,
-                end = MediumPadding1
-            )
-            .statusBarsPadding()
             .fillMaxSize()
+            .padding(top = MediumPadding1)
+            .statusBarsPadding()
     ) {
+        TextTitle(text = "Search")
+
+        Spacer(modifier = Modifier.height(MediumPadding3))
+
         SearchBar(
+            modifier = Modifier.padding(horizontal = MediumPadding1),
             text = state.searchQuery,
             readOnly = false,
             onValueChange = {
@@ -41,13 +45,13 @@ fun SearchScreen(
             }
         )
 
-        Spacer(modifier = Modifier.height(MediumPadding1))
+        Spacer(modifier = Modifier.height(MediumPadding3))
 
         state.items?.let {
-            val items = it.collectAsLazyPagingItems()
+            val books = it.collectAsLazyPagingItems()
             BooksGrid(
-                modifier = Modifier.padding(horizontal = MediumPadding1),
-                books = items,
+                modifier = Modifier.padding(horizontal = 18.dp),
+                books = books,
                 onClick = {
                     navigate(Route.BookDetailsScreen.route)
                 }
