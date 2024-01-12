@@ -27,10 +27,7 @@ class BookTypeConverter {
 
     @TypeConverter
     fun fromAccessInfoToString(accessInfo: AccessInfo): String {
-        println("Converting AccessInfo to String:")
-        val jsonString = gson.toJson(accessInfo)
-        println("Result: $jsonString")
-        return jsonString
+        return gson.toJson(accessInfo)
     }
 
     @TypeConverter
