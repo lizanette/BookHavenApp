@@ -3,6 +3,7 @@ package com.example.bookhavenapp.data.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.example.bookhavenapp.data.local.BookDao
 import com.example.bookhavenapp.data.remote.BooksApi
 import com.example.bookhavenapp.data.remote.BooksPagingSource
 import com.example.bookhavenapp.data.remote.SearchBooksPagingSource
@@ -11,7 +12,8 @@ import com.example.bookhavenapp.domain.repository.BooksRepository
 import kotlinx.coroutines.flow.Flow
 
 class BooksRepositoryImplementation(
-    private val booksApi: BooksApi
+    private val booksApi: BooksApi,
+    private val bookDao: BookDao
 ): BooksRepository {
     override fun getBooks(): Flow<PagingData<Item>> {
         return Pager(
@@ -34,5 +36,21 @@ class BooksRepositoryImplementation(
                 )
             }
         ).flow
+    }
+
+    override suspend fun selectBook(id: String): Item? {
+        return bookDao.getBook(id)
+    }
+
+    override suspend fun upsertBook(item: Item) {
+        bookDao.upsert(item)
+    }
+
+    override suspend fun deleteBook(item: Item) {
+        bookDao.delete(item)
+    }
+
+    override fun selectBooks(): Flow<List<Item>> {
+        return bookDao.getBooks()
     }
 }

@@ -308,7 +308,7 @@ fun BookDetailsScreen(
                         Spacer(modifier = Modifier.height(MediumPadding1))
 
                         Text(
-                            text = "Synopsis",
+                            text = "Description",
                             fontSize = 16.sp,
                             style = TextStyle(platformStyle = PlatformTextStyle(includeFontPadding = false)),
                             fontFamily = FontFamily(Font(R.font.poppins_bold)),

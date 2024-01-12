@@ -15,6 +15,7 @@ object Dimensions {
     val BookItemWidth = 176.dp
 
     val ExtraSmallPadding = 3.dp
+    val ExtraSmallPadding2 = 5.dp
 
     val IconSize = 20.dp
     val BigIconSize = 30.dp

@@ -1,4 +1,4 @@
-package com.example.bookhavenapp.presentation.search
+package com.example.bookhavenapp.presentation.bookmark
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -9,18 +9,17 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.paging.compose.collectAsLazyPagingItems
+import com.example.bookhavenapp.R
 import com.example.bookhavenapp.domain.model.Item
 import com.example.bookhavenapp.presentation.common.BooksGrid
+import com.example.bookhavenapp.presentation.common.Dimensions
 import com.example.bookhavenapp.presentation.common.Dimensions.MediumPadding1
-import com.example.bookhavenapp.presentation.common.Dimensions.MediumPadding3
-import com.example.bookhavenapp.presentation.common.SearchBar
+import com.example.bookhavenapp.presentation.common.EmptyContent
 import com.example.bookhavenapp.presentation.common.TextTitle
 
 @Composable
-fun SearchScreen(
-    state: SearchState,
-    event: (SearchEvent) -> Unit,
+fun BookmarkScreen(
+    state: BookmarkState,
     navigateToDetails: (Item) -> Unit
 ) {
     Column(
@@ -29,29 +28,19 @@ fun SearchScreen(
             .padding(top = MediumPadding1)
             .statusBarsPadding()
     ) {
-        TextTitle(text = "Search")
+        TextTitle(text = "Saved Books")
 
-        Spacer(modifier = Modifier.height(MediumPadding3))
+        Spacer(modifier = Modifier.height(Dimensions.MediumPadding3))
 
-        SearchBar(
-            modifier = Modifier.padding(horizontal = MediumPadding1),
-            text = state.searchQuery,
-            readOnly = false,
-            onValueChange = {
-                event(SearchEvent.UpdateSearchQuery(it))
-            },
-            onSearch = {
-                event(SearchEvent.SearchBooks)
-            }
-        )
-
-        Spacer(modifier = Modifier.height(MediumPadding3))
-
-        state.items?.let { it ->
-            val books = it.collectAsLazyPagingItems()
+        if(state.books.isEmpty()) {
+            EmptyContent(
+                message = "You haven't saved any books so far :(",
+                iconId = R.drawable.ic_search_document
+            )
+        } else {
             BooksGrid(
                 modifier = Modifier.padding(horizontal = 18.dp),
-                books = books,
+                books = state.books,
                 onClick = {
                     navigateToDetails(it)
                 }
