@@ -21,12 +21,12 @@ import com.example.bookhavenapp.presentation.common.Dimensions.MediumPadding1
 import com.example.bookhavenapp.presentation.common.Dimensions.MediumPadding3
 import com.example.bookhavenapp.presentation.common.SearchBar
 import com.example.bookhavenapp.presentation.common.TextTitle
-import com.example.bookhavenapp.presentation.navgraph.Route
 
 @Composable
 fun HomeScreen(
     books: LazyPagingItems<Item>,
-    navigate: (String) -> Unit
+    navigateToSearch: () -> Unit,
+    navigateToDetails: (Item) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -52,7 +52,7 @@ fun HomeScreen(
             readOnly = true,
             onValueChange = {},
             onClick = {
-                navigate(Route.SearchScreen.route)
+                navigateToSearch()
             },
             onSearch = {}
         )
@@ -67,7 +67,7 @@ fun HomeScreen(
             modifier = Modifier.padding(horizontal = 18.dp),
             books = books,
             onClick = {
-                navigate(Route.BookDetailsScreen.route)
+                navigateToDetails(it)
             }
         )
     }

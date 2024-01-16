@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 data class VolumeInfo(
     val allowAnonLogging: Boolean,
     val authors: List<String>?,
-    val averageRating: Double,
+    val averageRating: Double?,
     val canonicalVolumeLink: String,
     val categories: List<String>?,
     val contentVersion: String,

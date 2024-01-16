@@ -14,8 +14,12 @@ import com.example.bookhavenapp.domain.use_cases.app_entry.AppEntryUseCases
 import com.example.bookhavenapp.domain.use_cases.app_entry.ReadAppEntry
 import com.example.bookhavenapp.domain.use_cases.app_entry.SaveAppEntry
 import com.example.bookhavenapp.domain.use_cases.books.BooksUseCases
+import com.example.bookhavenapp.domain.use_cases.books.DeleteBook
 import com.example.bookhavenapp.domain.use_cases.books.GetBooks
 import com.example.bookhavenapp.domain.use_cases.books.SearchBooks
+import com.example.bookhavenapp.domain.use_cases.books.SelectBook
+import com.example.bookhavenapp.domain.use_cases.books.SelectBooks
+import com.example.bookhavenapp.domain.use_cases.books.UpsertBook
 import com.example.bookhavenapp.utils.Constants.BASE_URL
 import com.example.bookhavenapp.utils.Constants.BOOKS_DATABASE_NAME
 import dagger.Module
@@ -59,8 +63,9 @@ object AppModule {
     @Provides
     @Singleton
     fun provideBooksRepository(
-        booksApi: BooksApi
-    ): BooksRepository = BooksRepositoryImplementation(booksApi)
+        booksApi: BooksApi,
+        bookDao: BookDao
+    ): BooksRepository = BooksRepositoryImplementation(booksApi, bookDao)
 
     @Provides
     @Singleton
@@ -69,7 +74,11 @@ object AppModule {
     ): BooksUseCases {
         return BooksUseCases(
             getBooks = GetBooks(booksRepository),
-            searchBooks = SearchBooks(booksRepository)
+            searchBooks = SearchBooks(booksRepository),
+            selectBook = SelectBook(booksRepository),
+            upsertBook = UpsertBook(booksRepository),
+            deleteBook = DeleteBook(booksRepository),
+            selectBooks = SelectBooks(booksRepository),
         )
     }
 

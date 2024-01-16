@@ -13,6 +13,25 @@ import androidx.paging.compose.LazyPagingItems
 import com.example.bookhavenapp.domain.model.Item
 import com.example.bookhavenapp.presentation.common.Dimensions.MediumPadding1
 
+// Composable for the Bookmark grid
+@Composable
+fun BooksGrid(
+    modifier: Modifier = Modifier,
+    books: List<Item>,
+    onClick: (Item) -> Unit
+) {
+    LazyVerticalGrid(
+        modifier = modifier.fillMaxSize(),
+        columns = GridCells.Fixed(2),
+        verticalArrangement = Arrangement.spacedBy(20.dp),
+        content = {
+            items(count = books.size) {
+                val book = books[it]
+                BookItem(item = book, onClick = { onClick(book) })
+            }
+        }
+    )
+}
 
 @Composable
 fun BooksGrid(
