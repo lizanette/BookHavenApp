@@ -9,7 +9,7 @@ object Dimensions {
 
     val IndicatorSize = 14.dp
 
-    val PageIndicatorWidth = 52.dp
+    val PageIndicatorWidth = 60.dp
 
     val BookItemHeight = 280.dp
     val BookItemWidth = 176.dp
